@@ -1,19 +1,20 @@
-# Speedforce progress and implementation status
+# Speedforce
 
-This repository contains the existing NeoForge 21.1 / Minecraft 1.21.1 Java 21 mod, with server-authoritative velocity tiers, kinetic stamina, dash, strike, water-run support, client visual effects, and multiplayer payloads. The current content adds a Convergence Engine interaction, research materials, a persistent awakening marker, naturally placed Temporal Anomaly anchor clusters in Overworld biomes, and original GLSL effect sources.
+Minecraft 1.21.1 / NeoForge 21.1 / Java 21.
 
-## Natural anomaly discovery
+## Current playable loop
 
-The configured and placed feature in `data/speedforce/worldgen` is added to the Overworld through a NeoForge biome modifier. It scatters rare glowing temporal anchors at the surface in newly generated chunks; the default rarity filter uses one attempt per 110 eligible chunks. Explore newly generated Overworld terrain to find them. This is a rare feature-based anomaly landmark, not a registered jigsaw structure, so `/locate structure` is not provided.
+1. Explore newly generated Overworld chunks and look for the rare, glowing Temporal Anomaly Anchor clusters. They are added to Overworld biome generation by a NeoForge biome modifier. The feature is deliberately a feature-based landmark, not a registered structure; `/locate structure` does not apply.
+2. Mine anchors. Without Silk Touch, they drop Temporal Shards and have a chance to yield Chronal Fragments. Silk Touch preserves the anchor block.
+3. Craft a Convergence Engine, collect three Temporal Shards, a Resonance Core and Unstable Speedforce Essence, then interact with the engine. It consumes those materials and awakens the player at level 1. The awakening marker is stored in player persistent data and copied on death/respawn.
+4. Use the existing keybinds to change speed level, dash, strike, and switch energy theme. Server logic validates abilities and manages kinetic stamina.
 
-## Engine materials and interaction
-
-Craft the listed materials and engine using the recipes in `data/speedforce/recipe`. The engine consumes three Temporal Shards, one Resonance Core, and Unstable Essence, then starts the current level-one Speedforce ability. Player persistence is stored in vanilla persistent player data.
+The shard and essence recipes let players fill gaps in exploration finds; the anchor's loot is the intended early source of temporal research material.
 
 ## Graphics resources
 
-The `assets/speedforce/shaders` sources define procedural lightning/ribbon materials and speed distortion, chromatic separation, streaking and bloom stages. They are original GLSL source assets. Existing NeoForge/Minecraft rendering code remains the runtime renderer; the standalone post shader files are source assets and are not registered as a Minecraft post-effect chain by this commit. No claim is made that shader files alone are active runtime passes.
+The project includes original GLSL shader source assets and custom client effects from earlier commits. The shader files added under `assets/speedforce/shaders` are source materials, not yet wired to Minecraft's post-chain registration. They should not be described as active framebuffer passes.
 
-## Build and verification
+## Verification status and known gaps
 
-Run `./gradlew clean build` with Java 21 and network access to Gradle and NeoForge Maven. Dedicated-server/client launch, dimension registration, full trial gameplay, custom framebuffer/post-processing integration and real-world generation have not been runtime-tested here. The feature-based anomaly is not equivalent to the full custom dimension and trial in the original design brief.
+No `./gradlew clean build`, client launch, dedicated-server test, or multiplayer test has been run in this working context. The full requested registered structure with `/locate`, custom Speedforce dimension, ring trial, and shader/post-processing runtime pipeline are still not implemented. Run `./gradlew clean build` with Java 21 and dependency network access, then fix any resource or API validation issues before distributing.

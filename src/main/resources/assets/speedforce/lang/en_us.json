@@ -1,1 +1,27 @@
-{"advancements.speedforce.anomaly.title":"A Tear in the World","advancements.speedforce.anomaly.description":"Discover a naturally generated Temporal Anomaly anchor."}
+{
+  "block.speedforce.convergence_engine": "Speedforce Convergence Engine",
+  "block.speedforce.temporal_anchor": "Temporal Anomaly Anchor",
+  "item.speedforce.temporal_anchor": "Temporal Anomaly Anchor",
+  "item.speedforce.temporal_shard": "Temporal Shard",
+  "item.speedforce.chronal_fragment": "Chronal Fragment",
+  "item.speedforce.research_record": "Temporal Research Record",
+  "item.speedforce.resonance_core": "Resonance Core",
+  "item.speedforce.unstable_essence": "Unstable Speedforce Essence",
+  "message.speedforce.engine_needs_materials": "The engine requires 3 Temporal Shards, a Resonance Core, and Unstable Essence.",
+  "message.speedforce.engine_already_awakened": "The engine's resonance is already within you.",
+  "message.speedforce.engine_awakened": "The Convergence Engine ignites. You have awakened to the Speedforce!",
+  "message.speedforce.hungry": "You are too hungry to sustain the Speedforce.",
+  "message.speedforce.level": "Speedforce level: %s",
+  "message.speedforce.exhausted": "Kinetic energy depleted. Speedforce output reduced.",
+  "message.speedforce.recovered": "Kinetic energy recovered.",
+  "message.speedforce.inactive": "You have not awakened to the Speedforce.",
+  "message.speedforce.low_stamina": "Not enough kinetic energy.",
+  "advancements.speedforce.anomaly.title": "A Tear in the World",
+  "advancements.speedforce.anomaly.description": "Recover a Temporal Shard from a naturally generated anomaly.",
+  "key.categories.speedforce": "Speedforce",
+  "key.speedforce.up": "Increase Speedforce level",
+  "key.speedforce.down": "Decrease Speedforce level",
+  "key.speedforce.strike": "Lightning Strike",
+  "key.speedforce.dash": "Flash Dash",
+  "key.speedforce.theme": "Switch energy theme"
+}
