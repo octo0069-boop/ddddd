@@ -1,15 +1,19 @@
-# Speedforce - implementation notes
+# Speedforce progress and implementation status
 
-## Current project
+This repository contains the existing NeoForge 21.1 / Minecraft 1.21.1 Java 21 mod, with server-authoritative velocity tiers, kinetic stamina, dash, strike, water-run support, client visual effects, and multiplayer payloads. The current content adds a Convergence Engine interaction, research materials, a persistent awakening marker, naturally placed Temporal Anomaly anchor clusters in Overworld biomes, and original GLSL effect sources.
 
-This is a NeoForge 21.1 / Minecraft 1.21.1 Java 21 mod. The existing project already contained the ModDevGradle wrapper, client visual effects, movement, stamina, networking, and five-tier velocity tracking. The current commit adds the first integrated research-to-awakening loop rather than replacing that existing code.
+## Natural anomaly discovery
 
-## Convergence Engine loop
+The configured and placed feature in `data/speedforce/worldgen` is added to the Overworld through a NeoForge biome modifier. It scatters rare glowing temporal anchors at the surface in newly generated chunks; the default rarity filter uses one attempt per 110 eligible chunks. Explore newly generated Overworld terrain to find them. This is a rare feature-based anomaly landmark, not a registered jigsaw structure, so `/locate structure` is not provided.
 
-Craft the Convergence Engine, Temporal Shards, Resonance Core, and Unstable Speedforce Essence. Place the engine and interact with it while carrying three shards, one core, and one essence. It consumes these items, unlocks the player's Speedforce connection, and activates level one. The unlock is stored in player persistent data and restored on login and respawn. The existing Speedforce controls and server-authoritative gameplay are used after awakening.
+## Engine materials and interaction
 
-The three research ingredients currently have crafting recipes so the loop is playable in a standard survival world. This is a functional early progression loop, not yet the natural Temporal Anomaly discovery, trial, or custom dimension requested in the design brief.
+Craft the listed materials and engine using the recipes in `data/speedforce/recipe`. The engine consumes three Temporal Shards, one Resonance Core, and Unstable Essence, then starts the current level-one Speedforce ability. Player persistence is stored in vanilla persistent player data.
+
+## Graphics resources
+
+The `assets/speedforce/shaders` sources define procedural lightning/ribbon materials and speed distortion, chromatic separation, streaking and bloom stages. They are original GLSL source assets. Existing NeoForge/Minecraft rendering code remains the runtime renderer; the standalone post shader files are source assets and are not registered as a Minecraft post-effect chain by this commit. No claim is made that shader files alone are active runtime passes.
 
 ## Build and verification
 
-A compile or client/server test must be run in an environment able to download Gradle and NeoForge dependencies. No claim of compilation or runtime verification is made by this commit. In particular, validate the NeoForge event/API signatures with `./gradlew clean build`, then run both `runClient` and `runServer` before release.
+Run `./gradlew clean build` with Java 21 and network access to Gradle and NeoForge Maven. Dedicated-server/client launch, dimension registration, full trial gameplay, custom framebuffer/post-processing integration and real-world generation have not been runtime-tested here. The feature-based anomaly is not equivalent to the full custom dimension and trial in the original design brief.
