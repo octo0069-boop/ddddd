@@ -1,20 +1,10 @@
-# Speedforce
+# Speedforce progress update
 
-Minecraft 1.21.1 / NeoForge 21.1 / Java 21.
+The Convergence Engine interaction now has two server-validated paths:
 
-## Current playable loop
+- **Awakening:** bring three Temporal Shards, one Resonance Core, and Unstable Speedforce Essence. Interact normally for the Positive/gold path; sneak-interact for the Negative/red path. It validates every ingredient before consuming any, stores awakening/level/path on player persistent data, and activates level one.
+- **Mastery upgrades:** after awakening, bring two Chronal Fragments and one Resonance Core to the engine to advance the persistent level up to five. Upgrades are stored per player and restored after login/respawn, using the existing server-owned movement levels.
 
-1. Explore newly generated Overworld chunks and look for the rare, glowing Temporal Anomaly Anchor clusters. They are added to Overworld biome generation by a NeoForge biome modifier. The feature is deliberately a feature-based landmark, not a registered structure; `/locate structure` does not apply.
-2. Mine anchors. Without Silk Touch, they drop Temporal Shards and have a chance to yield Chronal Fragments. Silk Touch preserves the anchor block.
-3. Craft a Convergence Engine, collect three Temporal Shards, a Resonance Core and Unstable Speedforce Essence, then interact with the engine. It consumes those materials and awakens the player at level 1. The awakening marker is stored in player persistent data and copied on death/respawn.
-4. Use the existing keybinds to change speed level, dash, strike, and switch energy theme. Server logic validates abilities and manages kinetic stamina.
+The path selection uses the existing theme flag and server-side theme toggle. The persistent initial path is restored after login; the normal theme keybind remains available in play.
 
-The shard and essence recipes let players fill gaps in exploration finds; the anchor's loot is the intended early source of temporal research material.
-
-## Graphics resources
-
-The project includes original GLSL shader source assets and custom client effects from earlier commits. The shader files added under `assets/speedforce/shaders` are source materials, not yet wired to Minecraft's post-chain registration. They should not be described as active framebuffer passes.
-
-## Verification status and known gaps
-
-No `./gradlew clean build`, client launch, dedicated-server test, or multiplayer test has been run in this working context. The full requested registered structure with `/locate`, custom Speedforce dimension, ring trial, and shader/post-processing runtime pipeline are still not implemented. Run `./gradlew clean build` with Java 21 and dependency network access, then fix any resource or API validation issues before distributing.
+This update is not a claim that the original full mod is complete. A registered locatable structure, custom dimension, challenge trial, actual runtime shader/post chain, full regression build, and client/server multiplayer verification remain outstanding. Run `./gradlew clean build` in Java 21 with dependency network access to validate the current code/resources.

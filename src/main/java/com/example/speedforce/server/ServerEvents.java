@@ -1,5 +1,6 @@
 package com.example.speedforce.server;
 
+import com.example.speedforce.ConvergenceEngineBlock;
 import com.example.speedforce.Speedforce;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -8,48 +9,49 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-/** Game-bus (default bus) events, run on the logical server. Handlers ignore client-side players. */
+/** Logical-server lifecycle and tick hooks. */
 @EventBusSubscriber(modid = Speedforce.MODID)
 public final class ServerEvents {
     private ServerEvents() {}
 
     @SubscribeEvent
-    public static void onTick(PlayerTickEvent.Post e) {
-        if (e.getEntity() instanceof ServerPlayer sp) ServerLogic.tick(sp);
+    public static void onTick(PlayerTickEvent.Post event) {
+        if (event.getEntity() instanceof ServerPlayer player) ServerLogic.tick(player);
     }
 
     @SubscribeEvent
-    public static void onLogin(PlayerEvent.PlayerLoggedInEvent e) {
-        if (e.getEntity() instanceof ServerPlayer sp) ServerLogic.reset(sp);
+    public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            ServerLogic.reset(player);
+            ConvergenceEngineBlock.restore(player);
+        }
     }
 
     @SubscribeEvent
-    public static void onRespawn(PlayerEvent.PlayerRespawnEvent e) {
-        if (e.getEntity() instanceof ServerPlayer sp) ServerLogic.reset(sp);
+    public static void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            ServerLogic.reset(player);
+            ConvergenceEngineBlock.restore(player);
+        }
     }
 
-    /** Client wiped its prediction when the dimension changed; resend the full state. */
     @SubscribeEvent
-    public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent e) {
-        if (e.getEntity() instanceof ServerPlayer sp) ServerLogic.onDimensionChange(sp);
+    public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) ServerLogic.onDimensionChange(player);
     }
 
-    /** A player came into range of another player: hand them that player's current visual state. */
     @SubscribeEvent
-    public static void onStartTracking(PlayerEvent.StartTracking e) {
-        if (e.getEntity() instanceof ServerPlayer viewer && e.getTarget() instanceof ServerPlayer target) {
+    public static void onStartTracking(PlayerEvent.StartTracking event) {
+        if (event.getEntity() instanceof ServerPlayer viewer && event.getTarget() instanceof ServerPlayer target) {
             ServerLogic.onStartTracking(viewer, target);
         }
     }
 
     @SubscribeEvent
-    public static void onLogout(PlayerEvent.PlayerLoggedOutEvent e) {
-        if (e.getEntity() instanceof ServerPlayer sp) ServerLogic.forget(sp);
+    public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) ServerLogic.forget(player);
     }
 
-    /** Static state must not survive into the next integrated-server world. */
     @SubscribeEvent
-    public static void onServerStopped(ServerStoppedEvent e) {
-        ServerLogic.clearAll();
-    }
+    public static void onServerStopped(ServerStoppedEvent event) { ServerLogic.clearAll(); }
 }
