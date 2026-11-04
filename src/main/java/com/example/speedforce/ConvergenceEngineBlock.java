@@ -32,7 +32,6 @@ public final class ConvergenceEngineBlock extends Block {
         if (!(player instanceof ServerPlayer serverPlayer)) return InteractionResult.PASS;
 
         if (!serverPlayer.getPersistentData().getBoolean(AWAKENED_KEY)) {
-            // Validate the entire ingredient set before consuming any item (failed activation is lossless).
             if (!has(serverPlayer, ModContent.TEMPORAL_SHARD.get(), 3)
                     || !has(serverPlayer, ModContent.RESONANCE_CORE.get(), 1)
                     || !has(serverPlayer, ModContent.UNSTABLE_ESSENCE.get(), 1)) {
@@ -44,7 +43,7 @@ public final class ConvergenceEngineBlock extends Block {
             consume(serverPlayer, ModContent.UNSTABLE_ESSENCE.get(), 1);
             serverPlayer.getPersistentData().putBoolean(AWAKENED_KEY, true);
             serverPlayer.getPersistentData().putInt(LEVEL_KEY, 1);
-            boolean negative = serverPlayer.isCrou crouching();
+            boolean negative = serverPlayer.isCrouching();
             serverPlayer.getPersistentData().putBoolean(NEGATIVE_KEY, negative);
             ServerLogic.setLevel(serverPlayer, 1);
             if (negative) ServerLogic.onAction(serverPlayer, ActionPayload.THEME);
