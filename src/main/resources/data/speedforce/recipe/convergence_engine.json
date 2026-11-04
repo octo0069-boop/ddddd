@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["ABA", "CDC", "AEA"],
+  "key": {
+    "A": { "item": "minecraft:iron_ingot" },
+    "B": { "item": "minecraft:clock" },
+    "C": { "item": "minecraft:amethyst_shard" },
+    "D": { "item": "minecraft:lodestone" },
+    "E": { "item": "minecraft:lightning_rod" }
+  },
+  "result": { "id": "speedforce:convergence_engine", "count": 1 }
+}

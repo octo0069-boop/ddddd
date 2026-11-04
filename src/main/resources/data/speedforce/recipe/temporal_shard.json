@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" A ", "ABA", " A "],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "B": { "item": "minecraft:echo_shard" }
+  },
+  "result": { "id": "speedforce:temporal_shard", "count": 1 }
+}

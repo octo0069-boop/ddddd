@@ -7,7 +7,6 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
-/** Common entry point (loads on client AND server). Client-only stuff lives in SpeedforceClient. */
 @Mod(Speedforce.MODID)
 public class Speedforce {
     public static final String MODID = "speedforce";
@@ -19,7 +18,8 @@ public class Speedforce {
     public Speedforce(IEventBus modBus, ModContainer container) {
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         ModParticles.PARTICLES.register(modBus);
+        ModContent.BLOCKS.register(modBus);
+        ModContent.ITEMS.register(modBus);
         modBus.addListener(Network::register);
-        // Game-bus server events are picked up by @EventBusSubscriber on ServerEvents.
     }
 }
